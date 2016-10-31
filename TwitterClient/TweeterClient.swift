@@ -67,6 +67,7 @@ class TweeterClient: BDBOAuth1SessionManager {
         get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) -> Void in
             
             let tweetDictionaries = response as! [NSDictionary]
+            print(tweetDictionaries[0])
             
             let tweets = Tweet.tweetsWithArray(dictionaries: tweetDictionaries)
             
@@ -88,6 +89,44 @@ class TweeterClient: BDBOAuth1SessionManager {
             success(user)
             
             }, failure: { (task: URLSessionDataTask?, error: Error) in
+                failure(error)
+        })
+    }
+    
+    func postTweet(text: String!, success: @escaping () -> (), failure: @escaping (Error) -> ()){
+        let postText = "1.1/statuses/update.json?status=\(text!)"
+        post(postText, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) -> Void in
+            print("Your tweet is posted")
+            success()
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
+            failure(error)
+        })
+    }
+    
+    func replyTweet(text: String!, id: String!, success: @escaping () -> (), failure: @escaping (Error) -> ()){
+        post("1.1/statuses/update.json?status=\(text!)&in_reply_to_status_id=\(id!)", parameters: nil, progress: nil, success: {(task: URLSessionDataTask, response: Any?) -> Void in
+            print("Replied to tweet")
+            success()
+            }, failure: {(task: URLSessionDataTask?, error: Error) -> Void in
+                failure(error)
+        })
+    }
+    
+    func retweet(id: String!, success: @escaping () -> (), failure: @escaping (Error) -> ()){
+        post("1.1/statuses/retweet/\(id!).json", parameters: nil, progress: nil, success: {(task: URLSessionDataTask, response: Any?) -> Void in
+            print("Retweeted tweet")
+            success()
+            }, failure: {(task: URLSessionDataTask?, error: Error) -> Void in
+                failure(error)
+        })
+    }
+    
+    func favoriteTweet(id: String!, success: @escaping () -> (), failure: @escaping (Error) -> ()){
+        post("1.1/favorites/create.json?id=\(id!)", parameters: nil, progress: nil, success: {(task: URLSessionDataTask, response: Any?) -> Void in
+            print("Favorited tweet")
+            success()
+            }, failure: {(task: URLSessionDataTask?, error: Error) -> Void in
                 failure(error)
         })
     }

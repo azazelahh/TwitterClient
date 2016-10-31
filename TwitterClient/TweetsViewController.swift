@@ -11,6 +11,7 @@ import UIKit
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    
     var tweets: [Tweet]!
 
     override func viewDidLoad() {
@@ -22,15 +23,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         
-        TweeterClient.sharedInstance?.homeTimeline(success: { (tweets: [Tweet]) in
-            self.tweets = tweets
-            for tweet in tweets {
-                print(tweet.text!)
-            }
-            self.tableView.reloadData()
-        }, failure: { (error: Error) in
-                print(error.localizedDescription)
-        })
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+        
+        getHomeTimeline()
 
     }
 
@@ -53,6 +50,38 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         cell.tweet = tweets[indexPath.row]
         
         return cell
+    }
+    
+    func getHomeTimeline() {
+        
+        TweeterClient.sharedInstance?.homeTimeline(success: { (tweets: [Tweet]) in
+            self.tweets = tweets
+            for tweet in tweets {
+                print(tweet.text!)
+            }
+            self.tableView.reloadData()
+            
+        }, failure: { (error: Error) in
+                print(error.localizedDescription)
+        })
+    }
+    
+    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        getHomeTimeline()
+        refreshControl.endRefreshing()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "detailSegue") {
+            let cell = sender as! UITableViewCell
+            let indexPath =  tableView.indexPath(for: cell)
+            let tweet = tweets[(indexPath?.row)!]
+            
+            let detailViewController = segue.destination as! TweetDetailViewController
+            detailViewController.tweet = tweet
+        } else {
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -39,10 +39,27 @@ class TweetCell: UITableViewCell {
         // Configure the view for the selected state
     }
     @IBAction func replyButtonTap(_ sender: AnyObject) {
+        TweeterClient.sharedInstance?.replyTweet(text: "reply", id: tweet.id, success: {
+            
+            }, failure: { (error: Error) in
+                print("Did not reply to tweet. \(error.localizedDescription)")
+        })
     }
     @IBAction func retweetButtonTap(_ sender: AnyObject) {
+
+        TweeterClient.sharedInstance?.retweet(id: tweet.id, success: {
+            
+            }, failure: { (error: Error) in
+                print("Did not retweet. \(error.localizedDescription)")
+        })
     }
     @IBAction func favoriteButtonTap(_ sender: AnyObject) {
+
+        TweeterClient.sharedInstance?.favoriteTweet(id: tweet.id, success: {
+            
+            }, failure: { (error: Error) in
+                print("Did not favorite tweet. \(error.localizedDescription)")
+        })
     }
 
 }
