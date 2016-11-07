@@ -518,7 +518,13 @@
                             <constraint firstAttribute="trailing" secondItem="kpA-st-mXX" secondAttribute="trailing" id="v8C-EU-JqG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Mentions" id="qBj-rK-H8B"/>
+                    <navigationItem key="navigationItem" title="Mentions" id="qBj-rK-H8B">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="mzK-Ez-lQh">
+                            <connections>
+                                <action selector="onLogoutButtonClicked:" destination="PvV-Nq-iHg" id="7J9-7d-aoU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="kpA-st-mXX" id="VT7-nL-cX9"/>
                     </connections>

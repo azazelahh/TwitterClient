@@ -29,9 +29,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.estimatedRowHeight = 120
         if self.user == nil {
             setUser()
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ProfileViewController.onLogoutButtonClicked))
         }
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (tweets != nil){
             return tweets.count + 1
@@ -78,9 +79,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         })
     }
     
-//    @IBAction func onCancelButtonTap(_ sender: UIBarButtonItem) {
-//        dismiss(animated: true, completion: nil)
-//    }
+    func onLogoutButtonClicked() {
+        TweeterClient.sharedInstance?.logout()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
