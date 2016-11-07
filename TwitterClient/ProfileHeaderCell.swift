@@ -19,6 +19,10 @@ class ProfileHeaderCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.profileImageView.layer.borderColor = UIColor.white.cgColor
+        self.profileImageView.layer.borderWidth = 3
+        self.profileImageView.layer.cornerRadius = 5
+        self.profileImageView.clipsToBounds = true
     }
     
     func setUserProperties(user: User!) {

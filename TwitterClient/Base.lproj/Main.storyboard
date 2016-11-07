@@ -215,7 +215,7 @@
                                                     </constraints>
                                                     <state key="normal" title="set" image="settings"/>
                                                 </button>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Ym-YJ-XtN">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Ym-YJ-XtN">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="hSP-c5-Ef9"/>
                                                         <constraint firstAttribute="height" constant="90" id="jyc-2f-F6Y"/>
@@ -323,7 +323,7 @@
                                                         <constraint firstAttribute="width" constant="12" id="P9p-AQ-htk"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ucf-C0-vLQ">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ucf-C0-vLQ">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="65" id="XPE-i5-JOZ"/>
                                                         <constraint firstAttribute="height" constant="65" id="hXc-6O-Zj1"/>
@@ -555,7 +555,7 @@
                                             <frame key="frameInset" width="375" height="177"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6tT-y8-1UO">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6tT-y8-1UO">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="65" id="QVC-yB-UbA"/>
                                                         <constraint firstAttribute="width" constant="65" id="rxV-PM-Zsa"/>
@@ -700,7 +700,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eS1-Wb-0Tr">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eS1-Wb-0Tr">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="4yJ-4u-Weo"/>
                                     <constraint firstAttribute="height" constant="65" id="QDJ-6q-ElV"/>
@@ -837,7 +837,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FO7-gJ-DG2">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FO7-gJ-DG2">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="7Yz-XS-5TA"/>
                                     <constraint firstAttribute="width" constant="65" id="yHw-RV-aIt"/>

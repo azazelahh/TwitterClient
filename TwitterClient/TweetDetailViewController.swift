@@ -36,7 +36,10 @@ class TweetDetailViewController: UIViewController {
         dateFormatter.dateFormat = "MM/dd/yyyy, H:mm a"
         timestamp.text = dateFormatter.string(from: tweet.timestamp as! Date)
         retweets.text = String(tweet.retweetCount)
-        favorites.text = String(tweet.favoriteCount)        
+        favorites.text = String(tweet.favoriteCount)
+        
+        self.userImage.layer.cornerRadius = 5
+        self.userImage.clipsToBounds = true
         
     }
     

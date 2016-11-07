@@ -29,6 +29,9 @@ class NewTweetViewController: UIViewController, UITextViewDelegate {
         username.text = "@" + (user?.screenName)!
         count.text = String(0)
         
+        self.userImage.layer.cornerRadius = 5
+        self.userImage.clipsToBounds = true
+        
     }
     @IBAction func onCancelButtonTap(_ sender: AnyObject) {
         dismiss(animated: true, completion: nil)

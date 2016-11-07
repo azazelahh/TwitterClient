@@ -53,6 +53,9 @@ class TweetCell: UITableViewCell {
         let tapGestureRecognizer = UITapGestureRecognizer(target:self, action: #selector(tap(_:)))
         userImage.isUserInteractionEnabled = true
         userImage.addGestureRecognizer(tapGestureRecognizer)
+        
+        self.userImage.layer.cornerRadius = 5
+        self.userImage.clipsToBounds = true
     }
     
     func tap(_ gestureRecognizer: UITapGestureRecognizer) {
