@@ -19,6 +19,7 @@ class Tweet: NSObject {
     var userImageUrl: URL?
     var userName: String?
     var retweeted: Bool?
+    var mediaUrl: URL?
     var user: User!
     
     init(dictionary: NSDictionary) {
@@ -41,6 +42,14 @@ class Tweet: NSObject {
             let formatter = DateFormatter()
             formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
             timestamp = formatter.date(from: timestampString) as NSDate?
+        }
+        
+        if let entitiesDictionary = dictionary["entities"] as? NSDictionary {
+            if let mediaDictionary = (entitiesDictionary["media"] as? NSArray)?[0] as? NSDictionary {
+                if let mediaUrl = mediaDictionary["media_url_https"] as? String {
+                    self.mediaUrl = URL(string: mediaUrl)!
+                }
+            }
         }
         
         self.user = User(dictionary: userDictionary)

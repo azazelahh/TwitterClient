@@ -52,6 +52,9 @@ class HamburgerViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.dataSource = self
         tableView.delegate = self
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 60
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         tweetsNavigationController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
         profileNavigationController = storyboard.instantiateViewController(withIdentifier: "ProfileNavigationController")
@@ -99,6 +102,18 @@ class HamburgerViewController: UIViewController, UITableViewDataSource, UITableV
         
         let titles = ["Tweets", "Profile", "Mentions"]
         cell.menuTitleLabel.text = titles[indexPath.row]
+        
+        switch (indexPath.row) {
+            case 0:
+                cell.menuImageView.image = #imageLiteral(resourceName: "twitterWhite")
+            case 1:
+                cell.menuImageView.image = #imageLiteral(resourceName: "profile")
+            case 2:
+                cell.menuImageView.image = #imageLiteral(resourceName: "mentions")
+            default:
+                break
+            
+        }
         
         return cell
     }

@@ -18,6 +18,8 @@ class TweetDetailViewController: UIViewController {
     @IBOutlet weak var timestamp: UILabel!
     @IBOutlet weak var retweets: UILabel!
     @IBOutlet weak var favorites: UILabel!
+    @IBOutlet weak var mediaImageView: UIImageView!
+    @IBOutlet weak var mediaImageViewHeightConstraint: NSLayoutConstraint!
     
     var tweet: Tweet!
 
@@ -37,6 +39,15 @@ class TweetDetailViewController: UIViewController {
         timestamp.text = dateFormatter.string(from: tweet.timestamp as! Date)
         retweets.text = String(tweet.retweetCount)
         favorites.text = String(tweet.favoriteCount)
+        
+        if tweet.mediaUrl == nil {
+            mediaImageView.isHidden = true
+            mediaImageViewHeightConstraint.constant = 0
+        } else {
+            mediaImageView.isHidden = false
+            mediaImageViewHeightConstraint.constant = 200
+            mediaImageView.setImageWith(tweet.mediaUrl!)
+        }
         
         self.userImage.layer.cornerRadius = 5
         self.userImage.clipsToBounds = true

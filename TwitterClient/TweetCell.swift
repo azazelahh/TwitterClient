@@ -24,6 +24,8 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var tweetText: UILabel!
     @IBOutlet weak var retweetView: UIImageView!
     @IBOutlet weak var retweetedLabel: UILabel!
+    @IBOutlet weak var mediaImageView: UIImageView!
+    @IBOutlet weak var mediaImageViewHeightContstraint: NSLayoutConstraint!
     
     var user: User!
     
@@ -43,6 +45,14 @@ class TweetCell: UITableViewCell {
                 retweetView.isHidden = true
                 retweetedLabel.isHidden = true
             }
+            if tweet.mediaUrl == nil {
+                mediaImageView.isHidden = true
+                mediaImageViewHeightContstraint.constant = 0
+            } else {
+                mediaImageView.isHidden = false
+                mediaImageViewHeightContstraint.constant = 150
+                mediaImageView.setImageWith(tweet.mediaUrl!)
+            }
             self.user = tweet.user
         }
     }
@@ -55,6 +65,9 @@ class TweetCell: UITableViewCell {
         userImage.addGestureRecognizer(tapGestureRecognizer)
         
         self.userImage.layer.cornerRadius = 5
+        self.userImage.clipsToBounds = true
+        
+        self.mediaImageView.layer.cornerRadius = 5
         self.userImage.clipsToBounds = true
     }
     

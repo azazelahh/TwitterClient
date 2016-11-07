@@ -30,7 +30,7 @@ class ProfileHeaderCell: UITableViewCell {
             backgroundImageView.setImageWith(user.backgroundUrl!)
             profileImageView.setImageWith(user.profileUrl!)
             nameLabel.text = user.name
-            usernameLabel.text = user.screenName
+            usernameLabel.text = "@" + user.screenName!
             tweetCount.text = String(describing: user.tweetCount!)
             followingCount.text = String(describing: user.followingCount!)
             followerCount.text = String(describing: user.followerCount!)
