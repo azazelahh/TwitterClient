@@ -78,6 +78,38 @@ class TweeterClient: BDBOAuth1SessionManager {
         })
     }
     
+    func userTimeline(username: String!, success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+        
+        get("1.1/statuses/user_timeline.json?screen_name=\(username!)&count=20", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) -> Void in
+            
+            let tweetDictionaries = response as! [NSDictionary]
+            print(tweetDictionaries[0])
+            
+            let tweets = Tweet.tweetsWithArray(dictionaries: tweetDictionaries)
+            
+            success(tweets)
+            
+            }, failure: { (task: URLSessionDataTask?, error: Error) in
+                failure(error)
+        })
+    }
+    
+    func mentionsTimeline(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+        
+        get("1.1/statuses/mentions_timeline.json?count=20", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) -> Void in
+            
+            let tweetDictionaries = response as! [NSDictionary]
+            print(tweetDictionaries[0])
+            
+            let tweets = Tweet.tweetsWithArray(dictionaries: tweetDictionaries)
+            
+            success(tweets)
+            
+            }, failure: { (task: URLSessionDataTask?, error: Error) in
+                failure(error)
+        })
+    }
+    
     func currentAccount(success: @escaping (User) -> (), failure: @escaping (Error) -> ()) {
         
         get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) -> Void in

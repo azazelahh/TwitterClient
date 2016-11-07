@@ -7,14 +7,25 @@
 //
 
 import UIKit
+import Foundation
+
+protocol TweetCellDelegate {
+    func tweetCell(tweetCell: TweetCell, userImageTapped user: User)
+}
 
 class TweetCell: UITableViewCell {
+    
+    var delegate: TweetCellDelegate?
 
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userScreenName: UILabel!
     @IBOutlet weak var timestamp: UILabel!
     @IBOutlet weak var tweetText: UILabel!
+    @IBOutlet weak var retweetView: UIImageView!
+    @IBOutlet weak var retweetedLabel: UILabel!
+    
+    var user: User!
     
     var tweet: Tweet! {
         didSet {
@@ -25,12 +36,28 @@ class TweetCell: UITableViewCell {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM/dd/yyyy"
             timestamp.text = dateFormatter.string(from: tweet.timestamp as! Date)
+            if  tweet.retweeted != nil && tweet.retweeted! {
+                retweetView.isHidden = false
+                retweetedLabel.isHidden = false
+            } else {
+                retweetView.isHidden = true
+                retweetedLabel.isHidden = true
+            }
+            self.user = tweet.user
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action: #selector(tap(_:)))
+        userImage.isUserInteractionEnabled = true
+        userImage.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    func tap(_ gestureRecognizer: UITapGestureRecognizer) {
+        delegate?.tweetCell(tweetCell: self, userImageTapped: self.user)
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

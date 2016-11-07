@@ -8,11 +8,14 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TweetCellDelegate {
     
+    var delegate: TweetCellDelegate?
     @IBOutlet weak var tableView: UITableView!
     
     var tweets: [Tweet]!
+    
+    var user: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +51,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         
         cell.tweet = tweets[indexPath.row]
-        
+        cell.delegate = self
         return cell
     }
     
@@ -79,9 +82,15 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             
             let detailViewController = segue.destination as! TweetDetailViewController
             detailViewController.tweet = tweet
-        } else {
-            
+        } else if (segue.identifier == "ProfileSegue") {
+            let profileNavigationController = segue.destination as! UINavigationController
+            (profileNavigationController.viewControllers[0] as! ProfileViewController).user = self.user
         }
+    }
+    
+    func tweetCell(tweetCell: TweetCell, userImageTapped user: User) {
+        self.user = user
+        self.performSegue(withIdentifier: "ProfileSegue", sender: self)
     }
 
     override func didReceiveMemoryWarning() {

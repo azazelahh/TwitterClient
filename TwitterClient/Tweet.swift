@@ -18,19 +18,23 @@ class Tweet: NSObject {
     var userScreenName: String?
     var userImageUrl: URL?
     var userName: String?
+    var retweeted: Bool?
+    var user: User!
     
     init(dictionary: NSDictionary) {
         
         id = dictionary["id_str"] as? String
         text = dictionary["text"] as? String
-        let user = dictionary["user"] as! NSDictionary
-        userScreenName = user["screen_name"] as? String
-        let urlString = user["profile_image_url_https"] as? String
+        let userDictionary = dictionary["user"] as! NSDictionary
+        userScreenName = userDictionary["screen_name"] as? String
+        let urlString = userDictionary["profile_image_url_https"] as? String
         userImageUrl = URL(string: urlString!)!
-        userName = user["name"] as? String
+        userName = userDictionary["name"] as? String
         
         retweetCount = (dictionary["retweet_count"] as! Int) 
         favoriteCount = (dictionary["favorite_count"] as? Int) ?? 0
+        
+        retweeted = (dictionary["retweeted"] as? Bool) ?? false
         
         let timestampString = dictionary["created_at"] as? String
         if let timestampString = timestampString {
@@ -38,6 +42,8 @@ class Tweet: NSObject {
             formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
             timestamp = formatter.date(from: timestampString) as NSDate?
         }
+        
+        self.user = User(dictionary: userDictionary)
     }
     
     class func tweetsWithArray(dictionaries: [NSDictionary]) ->[Tweet] {
