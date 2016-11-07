@@ -83,8 +83,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             let detailViewController = segue.destination as! TweetDetailViewController
             detailViewController.tweet = tweet
         } else if (segue.identifier == "ProfileSegue") {
-            let profileNavigationController = segue.destination as! UINavigationController
-            (profileNavigationController.viewControllers[0] as! ProfileViewController).user = self.user
+            (segue.destination as! ProfileViewController).user = self.user
         }
     }
     

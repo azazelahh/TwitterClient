@@ -78,9 +78,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         })
     }
     
-    @IBAction func onCancelButtonTap(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
+//    @IBAction func onCancelButtonTap(_ sender: UIBarButtonItem) {
+//        dismiss(animated: true, completion: nil)
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

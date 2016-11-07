@@ -379,14 +379,7 @@
                             <constraint firstItem="rbi-qh-Ubr" firstAttribute="height" secondItem="AgL-TL-4XO" secondAttribute="height" id="mZx-Jr-lLB"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="KDC-t4-lI2">
-                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="hgK-fr-86J">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="onCancelButtonTap:" destination="TCg-Rs-dfH" id="LSE-QB-WUn"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Profile" id="KDC-t4-lI2"/>
                     <connections>
                         <outlet property="tableView" destination="rbi-qh-Ubr" id="BBD-iV-bWW"/>
                     </connections>
@@ -682,7 +675,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="uHx-I6-tMD" id="JMh-Bu-brp"/>
-                        <segue destination="2f1-qN-0Y1" kind="show" identifier="ProfileSegue" id="1Zk-qH-W6s"/>
+                        <segue destination="TCg-Rs-dfH" kind="show" identifier="ProfileSegue" id="Jj9-9n-oPV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IyW-7i-ELQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1004,4 +997,7 @@
         <image name="settings" width="24" height="24"/>
         <image name="tweet" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Jj9-9n-oPV"/>
+    </inferredMetricsTieBreakers>
 </document>
