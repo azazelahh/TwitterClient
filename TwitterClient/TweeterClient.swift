@@ -16,6 +16,8 @@ class TweeterClient: BDBOAuth1SessionManager {
     var loginSuccess: (() -> ())?
     var loginFailure: ((Error) -> ())?
     
+    public static var authorizedUser: User!
+    
     func login(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
         
         loginSuccess = success
@@ -118,6 +120,9 @@ class TweeterClient: BDBOAuth1SessionManager {
             let userDictionary = response as! NSDictionary
             let user = User(dictionary: userDictionary)
             
+            if TweeterClient.authorizedUser == nil {
+                TweeterClient.authorizedUser = user
+            }
             success(user)
             
             }, failure: { (task: URLSessionDataTask?, error: Error) in

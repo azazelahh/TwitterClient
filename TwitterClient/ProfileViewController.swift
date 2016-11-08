@@ -26,7 +26,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.dataSource = self
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 120
+        tableView.estimatedRowHeight = 200
         if self.user == nil {
             setUser()
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ProfileViewController.onLogoutButtonClicked))
@@ -53,6 +53,17 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "ProfileTweetSegue") {
+            let cell = sender as! UITableViewCell
+            let indexPath =  tableView.indexPath(for: cell)
+            let tweet = tweets[(indexPath?.row)! - 1]
+            
+            let detailViewController = segue.destination as! TweetDetailViewController
+            detailViewController.tweet = tweet
+        }
     }
     
     func setUser() {

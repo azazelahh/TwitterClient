@@ -17,13 +17,18 @@ class HamburgerViewController: UIViewController, UITableViewDataSource, UITableV
     
     var originalLeftMargin: CGFloat!
     
+    @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var userFullNameLabel: UILabel!
+    @IBOutlet weak var userScreenNameLabel: UILabel!
     
     private var tweetsNavigationController: UIViewController!
     private var profileNavigationController: UIViewController!
     private var mentionsNavigationController: UIViewController!
     
     var viewControllers: [UIViewController] = []
+    let titles = ["Tweets", "Profile", "Mentions", "Cats", "Kittens", "Cats in Love"]
+
     
     var contentViewController: UIViewController! {
         didSet(oldContentViewController) {
@@ -65,6 +70,17 @@ class HamburgerViewController: UIViewController, UITableViewDataSource, UITableV
         viewControllers.append(mentionsNavigationController)
         
         contentViewController = tweetsNavigationController
+        
+        self.userImage.layer.cornerRadius = self.userImage.frame.size.width/2
+        
+        TweeterClient.sharedInstance?.currentAccount(success: { (user) in
+            self.userImage.setImageWith(user.profileUrl!)
+            self.userFullNameLabel.text = user.name
+            self.userScreenNameLabel.text = "@" + user.screenName!
+            }, failure: { (error) in
+                print("\(error.localizedDescription)")
+        })
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -94,13 +110,12 @@ class HamburgerViewController: UIViewController, UITableViewDataSource, UITableV
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return titles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell", for: indexPath) as! MenuCell
         
-        let titles = ["Tweets", "Profile", "Mentions"]
         cell.menuTitleLabel.text = titles[indexPath.row]
         
         switch (indexPath.row) {
@@ -110,6 +125,12 @@ class HamburgerViewController: UIViewController, UITableViewDataSource, UITableV
                 cell.menuImageView.image = #imageLiteral(resourceName: "profile")
             case 2:
                 cell.menuImageView.image = #imageLiteral(resourceName: "mentions")
+            case 3:
+                cell.menuImageView.image = #imageLiteral(resourceName: "cat")
+            case 4:
+                cell.menuImageView.image = #imageLiteral(resourceName: "kitten")
+            case 5:
+                cell.menuImageView.image = #imageLiteral(resourceName: "cats")
             default:
                 break
             
@@ -119,8 +140,9 @@ class HamburgerViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        contentViewController = viewControllers[indexPath.row]
+        if indexPath.row < viewControllers.count {
+            contentViewController = viewControllers[indexPath.row]
+        }
     }
     
     
